@@ -56,6 +56,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.2.19"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
+    // Reactive network
+    implementation "com.github.pwittchen:reactivenetwork-rx2:3.0.8"
+
     // MultiDex
     implementation "com.android.support:multidex:1.0.3"
 

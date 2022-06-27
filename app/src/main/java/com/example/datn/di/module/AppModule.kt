@@ -12,6 +12,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -40,4 +41,7 @@ object AppModule {
     fun providerSharedPref(sharePrefImpl: SharedPrefImpl): SharedPref {
         return sharePrefImpl
     }
+
+    @Provides
+    fun provideCompositeDisposable() = CompositeDisposable()
 }

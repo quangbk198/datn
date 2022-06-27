@@ -5,5 +5,10 @@
     <string name="login_activity_hint_edt_username">Tài khoản</string>
     <string name="login_activity_hint_edt_password">Mật khẩu</string>
     <string name="login_activity_button_login">Đăng nhập</string>
+    <string name="login_activity_please_enter_username_and_pass">Vui lòng nhập tài khoản và mật khẩu</string>
+    <string name="login_activity_please_enter_username">Vui lòng nhập tài khoản</string>
+    <string name="login_activity_please_enter_pass">Vui lòng nhập mật khẩu</string>
+    <string name="login_activity_user_invalid">Tài khoản không hợp lệ</string>
+    <string name="login_activity_pass_invalid">Mật khẩu không hợp lệ</string>
 
 </resources>

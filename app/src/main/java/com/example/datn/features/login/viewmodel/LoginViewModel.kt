@@ -12,4 +12,8 @@ class LoginViewModel @Inject constructor(
     override fun onDidBindViewModel() {
 
     }
+
+    fun setStateLogin(state: Boolean) {
+        dataManager.setStateLogin(state)
+    }
 }

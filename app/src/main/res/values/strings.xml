@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Nhà yến</string>
 
+    <!--Device-->
+    <string name="light">Bóng đèn</string>
+    <string name="pump">Máy bơm</string>
+
     <!--Login Activity-->
     <string name="login_activity_hint_edt_username">Tài khoản</string>
     <string name="login_activity_hint_edt_password">Mật khẩu</string>

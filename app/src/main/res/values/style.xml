@@ -22,4 +22,16 @@
         <item name="android:textSize">16sp</item>
         <item name="android:background">@drawable/background_button</item>
     </style>
+
+    <style name="SwitchGreen" parent="Widget.AppCompat.Button">
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">@color/light_blue</item>
+
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">@color/light_blue</item>
+
+        <!-- colorAccent is used as the default value for colorControlActivated,
+             which is used to tint widgets -->
+        <item name="colorAccent">@color/light_blue</item>
+    </style>
 </resources>

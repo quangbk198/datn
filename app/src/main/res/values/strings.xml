@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Nhà yến</string>
 
+    <!--Common-->
+    <string name="application_touch_twice_to_exits">Nhấn BACK một lần nữa để thoát!</string>
+
     <!--Device-->
     <string name="light">Bóng đèn</string>
     <string name="pump">Máy bơm</string>
@@ -24,5 +27,14 @@
     <string name="main_activity_textview_option">Tùy chọn</string>
     <string name="main_activity_textview_chart">Đồ thị</string>
     <string name="main_activity_textview_mode">Chế độ</string>
+
+    <!--User Info Activity-->
+    <string name="user_info_activity_title_toolbar">Thông tin tài khoản</string>
+    <string name="user_info_activity_textview_student">Sinh viên:</string>
+    <string name="user_info_activity_textview_teacher">GVHD:</string>
+    <string name="user_info_activity_textview_lab">Lab:</string>
+    <string name="user_info_activity_textview_contact">Liên lạc:</string>
+    <string name="user_info_activity_textview_logout">Đăng xuất</string>
+    <string name="user_info_activity_textview_change_pass">Thay đổi mật khẩu</string>
 
 </resources>

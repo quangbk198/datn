@@ -2,15 +2,22 @@ package com.example.datn.features.main.ui
 
 import android.os.Build
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.datn.R
 import com.example.datn.core.base.BaseActivity
 import com.example.datn.databinding.ActivityMainBinding
 import com.example.datn.features.main.viewmodel.MainViewModel
+import com.example.datn.features.userinfo.ui.UserInfoActivity
+import com.example.datn.utils.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+
+    private var isUserCloseApp: Boolean = false
+
     override val viewModel: MainViewModel by viewModels()
 
     override fun inflateLayout(layoutInflater: LayoutInflater): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -22,10 +29,36 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun addViewListener() {
-
+        binding.apply {
+            ivUser.setOnClickListener {
+                openActivity(UserInfoActivity::class.java)
+            }
+        }
     }
 
     override fun setColorTextStatusBar() {
 
+    }
+
+    /**
+     * Double click back to exit app
+     */
+    private fun existApp() {
+        if (isUserCloseApp) {
+            finishAndRemoveTask()
+        } else {
+            showToast(getString(R.string.application_touch_twice_to_exits))
+            isUserCloseApp = true
+            val timer = Timer()
+            timer.schedule(object : TimerTask() {
+                override fun run() {
+                    isUserCloseApp = false
+                }
+            }, 3000)
+        }
+    }
+
+    override fun onBackPressed() {
+        existApp()
     }
 }

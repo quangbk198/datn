@@ -7,10 +7,12 @@
         <entry key="..\:/AndroidStudioProjects/datn/app/src/main/res/drawable/bg_item_tem_humi.xml" value="0.155" />
         <entry key="..\:/AndroidStudioProjects/datn/app/src/main/res/drawable/ic_line_chart.xml" value="0.155" />
         <entry key="..\:/AndroidStudioProjects/datn/app/src/main/res/drawable/ic_temperature.xml" value="0.1575" />
+        <entry key="..\:/AndroidStudioProjects/datn/app/src/main/res/drawable/ic_user_bg.xml" value="0.1575" />
         <entry key="..\:/AndroidStudioProjects/datn/app/src/main/res/drawable/ic_wave.xml" value="0.155" />
         <entry key="..\:/AndroidStudioProjects/datn/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/datn/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/datn/app/src/main/res/layout/activity_splash.xml" value="0.2421875" />
+        <entry key="..\:/AndroidStudioProjects/datn/app/src/main/res/layout/activity_user_info.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/datn/app/src/main/res/layout/item_device.xml" value="0.264" />
         <entry key="..\:/Users/QuangNH/AndroidStudioProjects/app/src/main/res/drawable-v24/ic_humidity.xml" value="0.2055" />
         <entry key="..\:/Users/QuangNH/AndroidStudioProjects/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2055" />

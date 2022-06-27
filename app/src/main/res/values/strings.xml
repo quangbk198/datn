@@ -17,5 +17,8 @@
     <string name="main_activity_textview_temperature">Nhiệt độ</string>
     <string name="main_activity_textview_humidity">Độ ẩm</string>
     <string name="main_activity_textview_state_device">Trạng thái thiết bị</string>
+    <string name="main_activity_textview_option">Tùy chọn</string>
+    <string name="main_activity_textview_chart">Đồ thị</string>
+    <string name="main_activity_textview_mode">Chế độ</string>
 
 </resources>

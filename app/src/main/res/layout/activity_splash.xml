@@ -7,7 +7,6 @@
     tools:context=".features.splash.ui.SplashActivity">
 
     <ImageView
-        android:layout_margin="80dp"
         android:layout_gravity="center"
         android:src="@drawable/logo_app_transparent"
         android:layout_width="wrap_content"

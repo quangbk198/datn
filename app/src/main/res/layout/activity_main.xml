@@ -10,6 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +51,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_label_app" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_tem_humi"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 android:layout_marginHorizontal="5dp"
@@ -63,23 +65,24 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_card_tem_and_humi">
 
                     <ImageView
-                        android:src="@drawable/ic_weather"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_sun"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/cv_temp"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <LinearLayout
                         android:id="@+id/cv_humi"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:layout_marginVertical="15dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="12dp"
                         android:background="@drawable/bg_item_tem_humi"
                         android:gravity="center"
                         android:orientation="vertical"
@@ -123,7 +126,7 @@
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:layout_marginVertical="15dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="12dp"
                         android:background="@drawable/bg_item_tem_humi"
                         android:gravity="center"
                         android:orientation="vertical"
@@ -160,6 +163,116 @@
                             android:text="@string/main_activity_textview_celsius_unit"
                             android:textColor="@color/grey_light_text"
                             android:textSize="18sp" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_label_device_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/opensans_semi_bold"
+                android:text="@string/main_activity_textview_state_device"
+                android:textColor="@color/dark_blue"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_tem_humi" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_device"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_label_device_status" />
+
+            <TextView
+                android:id="@+id/tv_label_option"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/opensans_semi_bold"
+                android:text="@string/main_activity_textview_option"
+                android:textColor="@color/dark_blue"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rcv_device" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_option"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="13dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_label_option">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/ln_chart"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/ln_mode"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_line_chart" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/opensans_regular"
+                            android:text="@string/main_activity_textview_chart"
+                            android:textColor="@color/dark_blue"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:id="@+id/ln_mode"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ln_chart"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_mode" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/opensans_regular"
+                            android:text="@string/main_activity_textview_mode"
+                            android:textColor="@color/dark_blue"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

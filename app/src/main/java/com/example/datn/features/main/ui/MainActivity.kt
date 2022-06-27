@@ -17,11 +17,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun onCommonViewLoaded() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            window.statusBarColor = getColor(R.color.light_blue_1)
+            window.statusBarColor = getColor(R.color.green_dark)
         }
     }
 
     override fun addViewListener() {
+
+    }
+
+    override fun setColorTextStatusBar() {
 
     }
 }

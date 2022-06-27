@@ -11,4 +11,11 @@
     <string name="login_activity_user_invalid">Tài khoản không hợp lệ</string>
     <string name="login_activity_pass_invalid">Mật khẩu không hợp lệ</string>
 
+    <!--Main Activity-->
+    <string name="main_activity_welcome_home">Welcome home!</string>
+    <string name="main_activity_textview_celsius_unit">°C</string>
+    <string name="main_activity_textview_temperature">Nhiệt độ</string>
+    <string name="main_activity_textview_humidity">Độ ẩm</string>
+    <string name="main_activity_textview_state_device">Trạng thái thiết bị</string>
+
 </resources>

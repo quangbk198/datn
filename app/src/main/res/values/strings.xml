@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">datn</string>
+
+    <!--Login Activity-->
+    <string name="login_activity_hint_edt_username">Tài khoản</string>
+    <string name="login_activity_hint_edt_password">Mật khẩu</string>
+    <string name="login_activity_button_login">Đăng nhập</string>
+
 </resources>

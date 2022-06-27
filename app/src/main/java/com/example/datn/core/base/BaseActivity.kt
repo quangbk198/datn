@@ -5,10 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
@@ -74,6 +71,20 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
         onCommonViewLoaded()
         addViewListener()
         addDataObserver()
+    }
+
+    open fun setColorTextStatusBar() {
+        val view = this.window.decorView
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            requireActivity().window.decorView.windowInsetsController?.hide(WindowInsets.Type.statusBars())
+            view.windowInsetsController?.setSystemBarsAppearance(
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+            )
+        } else {
+            @Suppress("DEPRECATION")
+            view.systemUiVisibility = view.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
     }
 
     private fun setWindowStatus(window: Window, statusbarColor: Int) {
@@ -271,6 +282,11 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
         }
 
         super.onBackPressed()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setColorTextStatusBar()
     }
 
     override fun onDestroy() {

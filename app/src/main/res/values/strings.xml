@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">datn</string>
+    <string name="app_name">Nhà yến</string>
 
     <!--Login Activity-->
     <string name="login_activity_hint_edt_username">Tài khoản</string>

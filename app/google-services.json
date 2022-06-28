@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "36083983098",
+    "firebase_url": "https://nha-yen-firebase-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "nha-yen-firebase",
+    "storage_bucket": "nha-yen-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36083983098:android:42b13e9165cce282eb5f43",
+        "android_client_info": {
+          "package_name": "com.example.datn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36083983098-80ucjfmqatkj4kf3110j1qq6oufbh5q7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.datn",
+            "certificate_hash": "d354f9a5f25029ead59a61ac8659b209d0c85a6c"
+          }
+        },
+        {
+          "client_id": "36083983098-14j3sojlu0un2rorrjihhv53hi6pejfk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABS8FdNeIHLuGrXlktHugcxoSkQgtCYXM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36083983098-14j3sojlu0un2rorrjihhv53hi6pejfk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

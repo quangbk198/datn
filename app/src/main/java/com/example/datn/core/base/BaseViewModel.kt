@@ -10,13 +10,18 @@ import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseViewModel : ViewModel() {
     lateinit var compositeDisposable: CompositeDisposable
+
     lateinit var schedulerProvider: SchedulerProvider
+
     lateinit var resourcesService: ResourcesService
+
     lateinit var dataManager: SharedPref
 
     open var isInitialized: Boolean = false
 
     open val loadingState = SingleLiveEvent<Boolean>()
+
+    open val errorState = SingleLiveEvent<String>()
 
 
     internal fun init(
@@ -33,6 +38,10 @@ abstract class BaseViewModel : ViewModel() {
 
     fun setLoading(isLoading: Boolean) {
         loadingState.value = isLoading
+    }
+
+    fun setErrorString(errorMessage: String) {
+        errorState.value = errorMessage
     }
 
     abstract fun onDidBindViewModel()

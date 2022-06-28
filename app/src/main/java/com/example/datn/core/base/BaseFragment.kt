@@ -78,6 +78,10 @@ abstract class BaseFragment<VB : ViewBinding, ViewModel : BaseViewModel> : Fragm
             viewModel.loadingState.observe(activity) {
                 onLoading(it)
             }
+
+            viewModel.errorState.observe(activity) {
+                onError(it)
+            }
         }
     }
 
@@ -89,6 +93,12 @@ abstract class BaseFragment<VB : ViewBinding, ViewModel : BaseViewModel> : Fragm
                 dataManager = dataManager
             )
             viewModel.onDidBindViewModel()
+        }
+    }
+
+    override fun onError(error: Any) {
+        if (activity is BaseActivity<*, *>) {
+            (activity as BaseActivity<*, *>).onError(error)
         }
     }
 

@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_colorFilter="@color/light_blue"
+        app:lottie_colorFilter="@color/green_dark"
         app:lottie_fileName="animation/loading.json"
         app:lottie_loop="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

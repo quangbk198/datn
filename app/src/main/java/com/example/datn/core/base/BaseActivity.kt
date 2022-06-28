@@ -17,6 +17,7 @@ import com.example.datn.di.component.resource.ResourcesService
 import com.example.datn.di.component.scheduler.SchedulerProvider
 import com.example.datn.di.component.sharepref.SharedPref
 import com.example.datn.utils.Constants
+import com.example.datn.utils.extension.showToast
 import javax.inject.Inject
 
 abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : FragmentActivity(), BaseBehavior {
@@ -147,6 +148,10 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
     }
 
     override fun addDataObserver() {
+        viewModel.errorState.observe(this) {
+            onError(it)
+        }
+
         viewModel.loadingState.observe(this) {
             onLoading(it)
         }
@@ -158,7 +163,8 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
     }
 
     override fun onError(error: Any) {
-
+        onLoading(false)
+        showToast(error.toString())
     }
 
     /**

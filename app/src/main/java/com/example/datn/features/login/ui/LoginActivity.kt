@@ -33,15 +33,22 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
                 } else if (pass.isBlank()) {
                     showToast(getString(R.string.login_activity_please_enter_pass))
                 } else {
-                    if (user != "admin") {
-                        showToast(getString(R.string.login_activity_user_invalid))
-                    } else if (pass != "123") {
-                        showToast(getString(R.string.login_activity_pass_invalid))
-                    } else {
-                        viewModel.setStateLogin(true)
-                        openActivity(MainActivity::class.java)
-                        finish()
-                    }
+                    onLoading(true)
+                    viewModel.startLogin(user, pass)
+                }
+            }
+        }
+    }
+
+    override fun addDataObserver() {
+        super.addDataObserver()
+
+        viewModel.apply {
+            loginState.observe(this@LoginActivity) { success ->
+                if (success) {
+                    onLoading(false)
+                    openActivity(MainActivity::class.java)
+                    finish()
                 }
             }
         }

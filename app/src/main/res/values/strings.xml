@@ -3,6 +3,7 @@
 
     <!--Common-->
     <string name="application_touch_twice_to_exits">Nhấn BACK một lần nữa để thoát!</string>
+    <string name="have_no_internet">Vui lòng kiểm tra lại kết nối mạng</string>
 
     <!--Device-->
     <string name="light">Bóng đèn</string>
@@ -16,7 +17,6 @@
     <string name="login_activity_please_enter_username">Vui lòng nhập tài khoản</string>
     <string name="login_activity_please_enter_pass">Vui lòng nhập mật khẩu</string>
     <string name="login_activity_user_invalid">Tài khoản không hợp lệ</string>
-    <string name="login_activity_pass_invalid">Mật khẩu không hợp lệ</string>
 
     <!--Main Activity-->
     <string name="main_activity_welcome_home">Welcome home!</string>

@@ -4,6 +4,8 @@
     <!--Common-->
     <string name="application_touch_twice_to_exits">Nhấn BACK một lần nữa để thoát!</string>
     <string name="have_no_internet">Vui lòng kiểm tra lại kết nối mạng</string>
+    <string name="save">Lưu</string>
+    <string name="cancel">Hủy</string>
 
     <!--Device-->
     <string name="light">Bóng đèn</string>
@@ -36,5 +38,11 @@
     <string name="user_info_activity_textview_contact">Liên lạc:</string>
     <string name="user_info_activity_textview_logout">Đăng xuất</string>
     <string name="user_info_activity_textview_change_pass">Thay đổi mật khẩu</string>
+
+    <!--Change Password Fragment-->
+    <string name="change_pass_fragment_title_toolbar_change_pass">Đổi mật khẩu</string>
+    <string name="change_pass_fragment_hint_old_pass">Mật khẩu cũ</string>
+    <string name="change_pass_fragment_hint_new_pass">Mật khẩu mới</string>
+    <string name="change_pass_fragment_hint_enter_new_pass_again">Nhập lại mật khẩu mới</string>
 
 </resources>

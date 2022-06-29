@@ -211,7 +211,7 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
         addFragment(fragment, animate = animate, clearStack = false, tag = tag)
     }
 
-    private fun addFragment(
+    fun addFragment(
         fragment: BaseFragment<*, *>,
         animate: Boolean = false,
         clearStack: Boolean = false,

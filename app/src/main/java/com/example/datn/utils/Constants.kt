@@ -8,4 +8,9 @@ object Constants {
     enum class SharePrefKey(val key: String) {
         StateLogin("state_login")
     }
+
+    enum class DeviceModel(val modelCode: String) {
+        Light("light"),
+        Pump("pump")
+    }
 }

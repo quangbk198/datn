@@ -35,15 +35,13 @@
         <item name="android:background">@drawable/background_button_white</item>
     </style>
 
-    <style name="SwitchGreen" parent="Widget.AppCompat.Button">
-        <!-- colorPrimary is used for the default action bar background -->
-        <item name="colorPrimary">@color/light_blue</item>
-
-        <!-- colorPrimaryDark is used for the status bar -->
-        <item name="colorPrimaryDark">@color/light_blue</item>
-
-        <!-- colorAccent is used as the default value for colorControlActivated,
-             which is used to tint widgets -->
-        <item name="colorAccent">@color/light_blue</item>
+    <style name="GreenSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/green_dark</item>
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#B3B3B3</item>
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">#42221f1f</item>
     </style>
+
 </resources>

@@ -5,17 +5,26 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.datn.R
 import com.example.datn.core.base.BaseActivity
 import com.example.datn.databinding.ActivityMainBinding
+import com.example.datn.features.main.ui.adapter.DeviceAdapter
 import com.example.datn.features.main.viewmodel.MainViewModel
 import com.example.datn.features.userinfo.ui.UserInfoActivity
 import com.example.datn.utils.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+
+    @Inject
+    lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
+
+    @Inject
+    lateinit var deviceAdapter: DeviceAdapter
 
     private var isUserCloseApp: Boolean = false
 
@@ -26,6 +35,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun onCommonViewLoaded() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             window.statusBarColor = getColor(R.color.green_dark)
+        }
+
+        binding.rcvDevice.apply {
+            adapter = deviceAdapter
+            layoutManager = staggeredGridLayoutManager
         }
     }
 
@@ -69,6 +83,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     tvTemperatureValue.text = String.format(getString(R.string.main_activity_textview_celsius_unit), data.tem)
                     tvPercentHumidity.text = "${getString(R.string.main_activity_textview_percent_humi, data.humi)}%"
                 }
+            }
+
+            childDevice.observe(this@MainActivity) { device ->
+                deviceAdapter.addData(device)
             }
         }
     }

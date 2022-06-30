@@ -2,6 +2,8 @@ package com.example.datn.di.module
 
 import com.example.datn.features.login.repository.LoginRepository
 import com.example.datn.features.login.repository.LoginRepositoryImpl
+import com.example.datn.features.main.repository.MainRepository
+import com.example.datn.features.main.repository.MainRepositoryimpl
 import com.example.datn.features.userinfo.repository.UserInfoRepository
 import com.example.datn.features.userinfo.repository.UserInfoRepositoryImpl
 import dagger.Binds
@@ -26,4 +28,6 @@ interface RepositoryModule {
     @Binds
     fun provideUserInfoRepository(userInfoRepositoryImpl: UserInfoRepositoryImpl): UserInfoRepository
 
+    @Binds
+    fun provideUserMainRepository(mainRepositoryimpl: MainRepositoryimpl): MainRepository
 }

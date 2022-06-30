@@ -1,5 +1,6 @@
 package com.example.datn.features.main.ui
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.view.LayoutInflater
 import android.widget.Toast
@@ -55,6 +56,20 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     isUserCloseApp = false
                 }
             }, 3000)
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun addDataObserver() {
+        super.addDataObserver()
+
+        viewModel.apply {
+            realtimeData.observe(this@MainActivity) { data ->
+                binding.apply {
+                    tvTemperatureValue.text = String.format(getString(R.string.main_activity_textview_celsius_unit), data.tem)
+                    tvPercentHumidity.text = "${getString(R.string.main_activity_textview_percent_humi, data.humi)}%"
+                }
+            }
         }
     }
 

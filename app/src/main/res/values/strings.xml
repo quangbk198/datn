@@ -26,7 +26,8 @@
 
     <!--Main Activity-->
     <string name="main_activity_welcome_home">Welcome home!</string>
-    <string name="main_activity_textview_celsius_unit">°C</string>
+    <string name="main_activity_textview_celsius_unit">%.1f°C</string>
+    <string name="main_activity_textview_percent_humi">%.1f</string>
     <string name="main_activity_textview_temperature">Nhiệt độ</string>
     <string name="main_activity_textview_humidity">Độ ẩm</string>
     <string name="main_activity_textview_state_device">Trạng thái thiết bị</string>

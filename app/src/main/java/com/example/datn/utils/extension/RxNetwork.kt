@@ -5,7 +5,7 @@ import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-class NetworkExtensions @Inject constructor(
+class RxNetwork @Inject constructor(
     private val compositeDisposable: CompositeDisposable,
     private val schedulerProvider: SchedulerProvider
 ) {

@@ -6,6 +6,10 @@
     <string name="have_no_internet">Vui lòng kiểm tra lại kết nối mạng</string>
     <string name="save">Lưu</string>
     <string name="cancel">Hủy</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+    <string name="enter_enough_infomation">Vui lòng nhập đủ thông tin</string>
+    <string name="notification">Thông báo</string>
 
     <!--Device-->
     <string name="light">Bóng đèn</string>
@@ -38,11 +42,15 @@
     <string name="user_info_activity_textview_contact">Liên lạc:</string>
     <string name="user_info_activity_textview_logout">Đăng xuất</string>
     <string name="user_info_activity_textview_change_pass">Thay đổi mật khẩu</string>
+    <string name="user_info_activity_message_dialog_confirm_logout">Bạn có chắc chắn muốn đăng xuất?</string>
 
     <!--Change Password Fragment-->
     <string name="change_pass_fragment_title_toolbar_change_pass">Đổi mật khẩu</string>
     <string name="change_pass_fragment_hint_old_pass">Mật khẩu cũ</string>
+    <string name="change_pass_fragment_old_pass_incorrect">Mật khẩu cũ không đúng</string>
     <string name="change_pass_fragment_hint_new_pass">Mật khẩu mới</string>
     <string name="change_pass_fragment_hint_enter_new_pass_again">Nhập lại mật khẩu mới</string>
+    <string name="change_pass_fragment_new_pass_not_match">Mật khẩu mới không khớp</string>
+    <string name="change_pass_fragment_update_pass_success">Cập nhật mật khẩu thành công</string>
 
 </resources>

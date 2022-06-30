@@ -6,14 +6,14 @@ import com.example.datn.R
 import com.example.datn.core.base.BaseViewModel
 import com.example.datn.features.login.repository.LoginRepository
 import com.example.datn.utils.Constants
-import com.example.datn.utils.extension.NetworkExtensions
+import com.example.datn.utils.extension.RxNetwork
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository,
-    private val networkExtensions: NetworkExtensions
+    private val rxNetwork: RxNetwork
 ) : BaseViewModel() {
 
     private val _loginState: MutableLiveData<Boolean> by lazy { MutableLiveData() }
@@ -27,7 +27,7 @@ class LoginViewModel @Inject constructor(
 
     }
 
-    fun setStateLogin(state: Boolean) {
+    private fun setStateLogin(state: Boolean) {
         dataManager.setStateLogin(state)
     }
 
@@ -35,7 +35,7 @@ class LoginViewModel @Inject constructor(
      * Get password from firebase database
      */
     private fun getPass() {
-        networkExtensions.checkInternet { isConnected ->
+        rxNetwork.checkInternet { isConnected ->
             if (isConnected) {
                 compositeDisposable.add(
                     loginRepository.getPass()

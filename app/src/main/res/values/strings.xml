@@ -14,6 +14,8 @@
     <!--Device-->
     <string name="light">Bóng đèn</string>
     <string name="pump">Máy bơm</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
 
     <!--Login Activity-->
     <string name="login_activity_hint_edt_username">Tài khoản</string>

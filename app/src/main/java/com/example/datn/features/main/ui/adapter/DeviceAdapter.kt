@@ -2,12 +2,14 @@ package com.example.datn.features.main.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.datn.R
 import com.example.datn.data.model.ChildDeviceModel
@@ -64,7 +66,17 @@ class DeviceAdapter(var mContext: Context) : RecyclerView.Adapter<DeviceAdapter.
             }
         }
 
-        holder.swState.isChecked = (device.state == 1)
+        holder.apply {
+            swState.isChecked = (device.state == 1)
+
+            tvOnOff.text =
+                if (device.state == 1) itemView.context.getString(R.string.on) else itemView.context.getString(R.string.off)
+
+            tvOnOff.setTextColor(ContextCompat.getColor(
+                itemView.context,
+                if (device.state == 1) R.color.light_blue else R.color.grey_light_text
+            ))
+        }
     }
 
     override fun getItemCount(): Int = mListDevice.size
@@ -73,11 +85,13 @@ class DeviceAdapter(var mContext: Context) : RecyclerView.Adapter<DeviceAdapter.
         var ivDevice: ImageView
         var tvDeviceName: TextView
         var swState: SwitchCompat
+        var tvOnOff: TextView
 
         init {
             ivDevice = view.findViewById(R.id.iv_device)
             tvDeviceName = view.findViewById(R.id.tv_device_name)
             swState = view.findViewById(R.id.sw_state_device)
+            tvOnOff = view.findViewById(R.id.tv_on_off)
         }
     }
 }

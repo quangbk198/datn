@@ -28,7 +28,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
         super.addDataObserver()
 
         viewModel.isLogin.observe(this) { isLogin ->
-            delayFunction(500) {
+            delayFunction(2000) {
                 if (isLogin) {
                     openActivity(MainActivity::class.java)
                 } else {

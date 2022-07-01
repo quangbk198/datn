@@ -54,4 +54,10 @@
     <string name="change_pass_fragment_new_pass_not_match">Mật khẩu mới không khớp</string>
     <string name="change_pass_fragment_update_pass_success">Cập nhật mật khẩu thành công</string>
 
+    <!--User Info Activity-->
+    <string name="chart_activity_title_toolbar">Đồ thị</string>
+
+    <!--Setting Activity-->
+    <string name="setting_activity_title_toolbar">Cấu hình ngưỡng</string>
+
 </resources>

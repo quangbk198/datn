@@ -17,6 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Datn"
         tools:targetApi="31">
+        <activity android:name=".features.setting.ui.SettingActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="locked" />
+
+        <activity
+            android:name=".features.chart.ui.ChartActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="locked" />
         <activity
             android:name=".features.userinfo.ui.UserInfoActivity"
             android:exported="false"

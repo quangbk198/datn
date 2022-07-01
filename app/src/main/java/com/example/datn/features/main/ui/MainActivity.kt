@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.datn.R
 import com.example.datn.core.base.BaseActivity
 import com.example.datn.databinding.ActivityMainBinding
+import com.example.datn.features.chart.ui.ChartActivity
 import com.example.datn.features.main.ui.adapter.DeviceAdapter
 import com.example.datn.features.main.viewmodel.MainViewModel
+import com.example.datn.features.setting.ui.SettingActivity
 import com.example.datn.features.userinfo.ui.UserInfoActivity
 import com.example.datn.utils.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,6 +51,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         binding.apply {
             ivUser.setOnClickListener {
                 openActivity(UserInfoActivity::class.java)
+            }
+
+            lnChart.setOnClickListener {
+                openActivity(ChartActivity::class.java)
+            }
+
+            lnMode.setOnClickListener {
+                openActivity(SettingActivity::class.java)
             }
         }
     }

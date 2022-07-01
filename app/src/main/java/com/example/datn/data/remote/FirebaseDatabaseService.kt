@@ -1,6 +1,7 @@
 package com.example.datn.data.remote
 
 import android.content.Context
+import android.util.Log
 import com.example.datn.R
 import com.example.datn.data.model.ChildDeviceModel
 import com.example.datn.data.model.DataRealtimeTemHumi
@@ -70,7 +71,7 @@ class FirebaseDatabaseService @Inject constructor(
         }
     }
 
-    fun getListChildDevice(): Observable<ChildDeviceModel> {
+    fun getListChildDevice(): Observable<Triple<ChildDeviceModel, String, String>> {
         val myRef = firebaseDatabase.getReference("swiftlet_home/user/admin/child_device")
 
         return Observable.create { emitter ->
@@ -78,12 +79,15 @@ class FirebaseDatabaseService @Inject constructor(
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                     val device = snapshot.getValue(ChildDeviceModel::class.java)
                     if (device != null) {
-                        emitter.onNext(device)
+                        emitter.onNext(Triple(device, "get", Constants.EMPTY_STRING))
                     }
                 }
 
                 override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-
+                    val device = snapshot.getValue(ChildDeviceModel::class.java)
+                    if (device != null) {
+                        emitter.onNext(Triple(device, "update", Constants.EMPTY_STRING))
+                    }
                 }
 
                 override fun onChildRemoved(snapshot: DataSnapshot) {
@@ -95,7 +99,7 @@ class FirebaseDatabaseService @Inject constructor(
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-
+                    emitter.onNext(Triple(ChildDeviceModel(), "error", error.message))
                 }
             })
         }

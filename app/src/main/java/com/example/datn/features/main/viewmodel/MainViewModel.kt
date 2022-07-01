@@ -3,6 +3,7 @@ package com.example.datn.features.main.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.datn.R
 import com.example.datn.core.base.BaseViewModel
 import com.example.datn.data.model.ChildDeviceModel
 import com.example.datn.data.model.DataRealtimeTemHumi
@@ -17,11 +18,11 @@ class MainViewModel @Inject constructor(
 
     private val _realtimeData: MutableLiveData<DataRealtimeTemHumi> by lazy { MutableLiveData() }
 
-    private val _childDevice: MutableLiveData<ChildDeviceModel> by lazy { MutableLiveData() }
+    private val _childDevice: MutableLiveData<Pair<ChildDeviceModel, String>> by lazy { MutableLiveData() }
 
     val realtimeData: LiveData<DataRealtimeTemHumi> get() = _realtimeData
 
-    val childDevice: LiveData<ChildDeviceModel> get() = _childDevice
+    val childDevice: LiveData<Pair<ChildDeviceModel, String>> get() = _childDevice
 
     override fun onDidBindViewModel() {
         getRealtimeDataTemAndHumi()
@@ -44,8 +45,16 @@ class MainViewModel @Inject constructor(
             mainRepository.getListChildDevice()
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
-                .subscribe { device ->
-                    _childDevice.value = device
+                .subscribe { data ->
+                    when (data.second) {
+                        "get", "update" -> {
+                            _childDevice.value = Pair(data.first, data.second)
+                        }
+
+                        "error" -> {
+                            setErrorString(data.third)
+                        }
+                    }
                 }
         )
     }

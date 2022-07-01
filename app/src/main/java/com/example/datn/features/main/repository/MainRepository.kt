@@ -14,5 +14,5 @@ interface MainRepository {
     /**
      * Get list child device
      */
-    fun getListChildDevice(): Observable<ChildDeviceModel>
+    fun getListChildDevice(): Observable<Triple<ChildDeviceModel, String, String>>
 }

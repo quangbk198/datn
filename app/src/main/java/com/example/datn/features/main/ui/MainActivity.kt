@@ -5,6 +5,7 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.datn.R
 import com.example.datn.core.base.BaseActivity
@@ -40,6 +41,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         binding.rcvDevice.apply {
             adapter = deviceAdapter
             layoutManager = staggeredGridLayoutManager
+            (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
         }
     }
 
@@ -85,8 +87,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 }
             }
 
-            childDevice.observe(this@MainActivity) { device ->
-                deviceAdapter.addData(device)
+            childDevice.observe(this@MainActivity) { data ->
+                when (data.second) {
+                    "get" -> {
+                        deviceAdapter.addData(data.first)
+                    }
+
+                    "update" -> {
+                        deviceAdapter.updateData(data.first)
+                    }
+                }
             }
         }
     }

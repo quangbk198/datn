@@ -25,18 +25,18 @@ class DeviceAdapter(var mContext: Context) : RecyclerView.Adapter<DeviceAdapter.
 
     private val mListDevice = mutableListOf<ChildDeviceModel>()
 
-    fun setData(list: MutableList<ChildDeviceModel>) {
-        mListDevice.apply {
-            clear()
-            addAll(list)
-        }
-
-        notifyDataSetChanged()
-    }
-
     fun addData(device: ChildDeviceModel) {
         mListDevice.add(device)
         notifyDataSetChanged()
+    }
+
+    fun updateData(device: ChildDeviceModel) {
+        for ((index, childDevice) in mListDevice.withIndex()) {
+            if (device.model_code == childDevice.model_code) {
+                childDevice.state = device.state
+                notifyItemChanged(index)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceViewHolder {

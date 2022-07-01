@@ -15,7 +15,7 @@ class MainRepositoryimpl @Inject constructor(
         return firebaseDatabaseService.getRealtimeDataTemAndHumi()
     }
 
-    override fun getListChildDevice(): Observable<ChildDeviceModel> {
+    override fun getListChildDevice(): Observable<Triple<ChildDeviceModel, String, String>> {
         return firebaseDatabaseService.getListChildDevice()
     }
 }

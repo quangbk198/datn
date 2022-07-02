@@ -13,4 +13,9 @@ object Constants {
         Light("light"),
         Pump("pump")
     }
+
+    enum class TypeCalendar {
+        DATE,
+        MONTH
+    }
 }

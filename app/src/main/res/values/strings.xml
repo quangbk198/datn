@@ -16,6 +16,8 @@
     <string name="pump">Máy bơm</string>
     <string name="on">ON</string>
     <string name="off">OFF</string>
+    <string name="day">Ngày</string>
+    <string name="month">Tháng</string>
 
     <!--Login Activity-->
     <string name="login_activity_hint_edt_username">Tài khoản</string>
@@ -61,5 +63,10 @@
 
     <!--Setting Activity-->
     <string name="setting_activity_title_toolbar">Cấu hình ngưỡng</string>
+
+    <!--Chart Activity-->
+    <string name="chart_activity_textview_day_data">Dữ liệu ngày:</string>
+    <string name="chart_activity_textview_month_data">Dữ liệu tháng:</string>
+    <string name="chart_activity_label_chart">Đồ thị nhiệt độ, độ ẩm</string>
 
 </resources>

@@ -3,6 +3,12 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven { url "https://jitpack.io" }
+        jcenter()
+        jcenter {
+            url 'http://jcenter.bintray.com'
+            allowInsecureProtocol = true
+        }
     }
 }
 dependencyResolutionManagement {
@@ -11,6 +17,11 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url "https://jitpack.io" }
+        jcenter()
+        jcenter {
+            url 'http://jcenter.bintray.com'
+            allowInsecureProtocol = true
+        }
     }
 }
 rootProject.name = "datn"

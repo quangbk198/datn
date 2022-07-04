@@ -100,6 +100,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/green_light"
             android:padding="10dp">
 
             <TextView
@@ -113,6 +114,20 @@
                 android:fontFamily="@font/opensans_regular"
                 android:textColor="@color/dark_blue"
                 android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_no_data"
+                android:text="@string/chart_activity_data_chart_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/tv_label_tem"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/tv_label_chart"
+                android:fontFamily="@font/opensans_semi_bold"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/lc_line_chart"

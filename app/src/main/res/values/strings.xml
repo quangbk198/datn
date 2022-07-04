@@ -68,5 +68,8 @@
     <string name="chart_activity_textview_day_data">Dữ liệu ngày:</string>
     <string name="chart_activity_textview_month_data">Dữ liệu tháng:</string>
     <string name="chart_activity_label_chart">Đồ thị nhiệt độ, độ ẩm</string>
+    <string name="chart_activity_data_tem_empty">Không có dữ liệu đồ thị của nhiệt độ</string>
+    <string name="chart_activity_data_humi_empty">Không có dữ liệu đồ thị của độ ẩm</string>
+    <string name="chart_activity_data_chart_empty">Không có dữ liệu đồ thị</string>
 
 </resources>

@@ -1,7 +1,5 @@
 package com.example.datn.features.chart.viewmodel
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.datn.R
@@ -12,18 +10,22 @@ import com.example.datn.data.model.TemHumiWrapModel
 import com.example.datn.features.chart.repository.ChartRepository
 import com.example.datn.utils.Constants
 import com.example.datn.utils.extension.RxNetwork
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.Single
 import java.util.*
-import java.util.stream.Collectors
 import javax.inject.Inject
-import kotlin.collections.HashMap
+import kotlin.math.roundToLong
 
 @HiltViewModel
 class ChartViewModel @Inject constructor(
     private val chartRepository: ChartRepository,
     private val rxNetwork: RxNetwork
 ) : BaseViewModel() {
+
+    private val _processDataGraphSuccess: MutableLiveData<Boolean> by lazy { MutableLiveData() }
+
+    val processDataGraphSuccess: LiveData<Boolean> get() = _processDataGraphSuccess
 
     // Dữ liệu ngày, tháng, năm của loại đồ thị theo ngày
     var yearDayType = Calendar.getInstance().get(Calendar.YEAR)
@@ -36,18 +38,17 @@ class ChartViewModel @Inject constructor(
 
     private val listDataGraph: MutableList<TemHumiWrapModel> = mutableListOf()
 
-    private val _listDataTemByDay: MutableLiveData<List<TemGraphModel>> by lazy { MutableLiveData() }
+    val listDataTemByDay: MutableList<TemGraphModel> = mutableListOf()
 
-    private val _listDataHumiByDay: MutableLiveData<List<HumiGraphModel>> by lazy { MutableLiveData() }
+    val listDataHumiByDay: MutableList<HumiGraphModel> = mutableListOf()
 
-    val listDataTemByDay: LiveData<List<TemGraphModel>> get() = _listDataTemByDay
+    val dataSets: ArrayList<ILineDataSet> by lazy { arrayListOf() }
 
-    val listDataHumiByDay: LiveData<List<HumiGraphModel>> get() = _listDataHumiByDay
 
     override fun onDidBindViewModel() {
         // Lấy dữ liệu đồ thị theo ngày
-//        getTemHumiByDay(dayDayType, monthDayType, yearDayType)
-        getTemHumiByDay(1, 1, 2022)
+        getTemHumiByDay(dayDayType, monthDayType, yearDayType)
+//        getTemHumiByDay(1, 1, 2022)
     }
 
     /**
@@ -70,6 +71,7 @@ class ChartViewModel @Inject constructor(
                         .observeOn(schedulerProvider.ui())
                         .subscribe { dataResponse ->
                             if (dataResponse.second != Constants.EMPTY_STRING) {
+                                _processDataGraphSuccess.value = false
                                 setErrorString(dataResponse.second)
                             } else {
                                 if (dataResponse.third) {
@@ -104,9 +106,11 @@ class ChartViewModel @Inject constructor(
                 }
             }
 
-            data.forEach { temHumiModel ->
-                listTem.add(TemGraphModel(temHumiModel.time, temHumiModel.tem))
+            for((key, value) in grouped) {
+                val temInHour = ((value.sumOf { it.tem ?: 0.0 } / value.size) * 10).roundToLong() / 10.0
+                listTem.add(TemGraphModel(key, temInHour))
             }
+
             emitter.onSuccess(listTem)
         }
     }
@@ -115,9 +119,22 @@ class ChartViewModel @Inject constructor(
         return Single.create { emitter ->
             val listHumi = mutableListOf<HumiGraphModel>()
 
-            data.forEach { temHumiModel ->
-                listHumi.add(HumiGraphModel(temHumiModel.time, temHumiModel.humi))
+            val grouped = mutableMapOf<Int, MutableList<HumiGraphModel>>()
+
+            data.forEach { temHumi ->
+                temHumi.time?.let { key ->
+                    if (!grouped.containsKey(key)) {
+                        grouped[key] = mutableListOf()
+                    }
+                    grouped[key]?.add(HumiGraphModel(temHumi.time, temHumi.humi))
+                }
             }
+
+            for((key, value) in grouped) {
+                val humiInHour = ((value.sumOf { it.humi ?: 0.0 } / value.size) * 10).roundToLong() / 10.0
+                listHumi.add(HumiGraphModel(key, humiInHour))
+            }
+
             emitter.onSuccess(listHumi)
         }
     }
@@ -135,8 +152,14 @@ class ChartViewModel @Inject constructor(
             }.subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
                 .subscribe { value ->
-                    _listDataTemByDay.value = value.first
-                    _listDataHumiByDay.value = value.second
+                    setLoading(false)
+
+                    if (listDataTemByDay.isNotEmpty()) listDataTemByDay.clear()
+                    if (listDataHumiByDay.isNotEmpty()) listDataHumiByDay.clear()
+                    listDataTemByDay.addAll(value.first)
+                    listDataHumiByDay.addAll(value.second)
+
+                    _processDataGraphSuccess.value = true
                 }
         )
     }

@@ -5,6 +5,6 @@ import com.google.firebase.database.IgnoreExtraProperties
 @IgnoreExtraProperties
 class TemHumiWrapModel {
     var time: Int? = null
-    var humi: Float? = null
-    var tem: Float? = null
+    var humi: Double? = null
+    var tem: Double? = null
 }

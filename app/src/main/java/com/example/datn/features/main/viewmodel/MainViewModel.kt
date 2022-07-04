@@ -1,12 +1,10 @@
 package com.example.datn.features.main.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.datn.R
 import com.example.datn.core.base.BaseViewModel
 import com.example.datn.data.model.ChildDeviceModel
-import com.example.datn.data.model.DataRealtimeTemHumi
+import com.example.datn.data.model.TemHumiWrapModel
 import com.example.datn.features.main.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -16,11 +14,11 @@ class MainViewModel @Inject constructor(
     private val mainRepository: MainRepository
 ) : BaseViewModel() {
 
-    private val _realtimeData: MutableLiveData<DataRealtimeTemHumi> by lazy { MutableLiveData() }
+    private val _realtimeData: MutableLiveData<TemHumiWrapModel> by lazy { MutableLiveData() }
 
     private val _childDevice: MutableLiveData<Pair<ChildDeviceModel, String>> by lazy { MutableLiveData() }
 
-    val realtimeData: LiveData<DataRealtimeTemHumi> get() = _realtimeData
+    val realtimeData: LiveData<TemHumiWrapModel> get() = _realtimeData
 
     val childDevice: LiveData<Pair<ChildDeviceModel, String>> get() = _childDevice
 

@@ -1,10 +1,9 @@
 package com.example.datn.data.remote
 
 import android.content.Context
-import android.util.Log
 import com.example.datn.R
 import com.example.datn.data.model.ChildDeviceModel
-import com.example.datn.data.model.DataRealtimeTemHumi
+import com.example.datn.data.model.TemHumiWrapModel
 import com.example.datn.utils.Constants
 import com.google.firebase.database.*
 import io.reactivex.Observable
@@ -52,13 +51,13 @@ class FirebaseDatabaseService @Inject constructor(
         }
     }
 
-    fun getRealtimeDataTemAndHumi(): Observable<DataRealtimeTemHumi> {
+    fun getRealtimeDataTemAndHumi(): Observable<TemHumiWrapModel> {
         val myRef = firebaseDatabase.getReference("swiftlet_home/user/admin/device/sht_sensor/real_time")
 
         return Observable.create { emitter ->
             myRef.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val data = snapshot.getValue(DataRealtimeTemHumi::class.java)
+                    val data = snapshot.getValue(TemHumiWrapModel::class.java)
                     if (data != null) {
                         emitter.onNext(data)
                     }
@@ -103,5 +102,66 @@ class FirebaseDatabaseService @Inject constructor(
                 }
             })
         }
+    }
+
+    fun getTemHumiByDay(
+        day: Int,
+        month: Int,
+        year: Int
+    ): Observable<Triple<TemHumiWrapModel, String, Boolean>> {
+
+        return Observable.create { emitter ->
+            val path = "swiftlet_home/user/admin/device/sht_sensor/chart_value/year/$year/month/$month/day/$day/hour"
+
+            val myRef = firebaseDatabase.getReference(path)
+
+            myRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshotHour: DataSnapshot) {
+
+                    var sizeSnapshotHour = 0
+                    snapshotHour.children.forEach { _ ->
+                        sizeSnapshotHour++
+                    }
+
+                    snapshotHour.children.forEachIndexed { indexHour, dataSnapshot ->
+                        dataSnapshot.key?.let { keyHour ->
+
+                            firebaseDatabase.getReference("$path/$keyHour").addValueEventListener(object : ValueEventListener {
+                                override fun onDataChange(snapshot: DataSnapshot) {
+
+                                    var sizeSnapshot = 0
+                                    snapshot.children.forEach { _ ->
+                                        sizeSnapshot++
+                                    }
+
+                                    snapshot.children.forEachIndexed { indexHourDetail, data ->
+                                        data.key?.let { keyDetail ->
+                                            val temHumiModel = snapshot.child(keyDetail).getValue(TemHumiWrapModel::class.java)
+                                            if (temHumiModel != null) {
+                                                if ((indexHour == sizeSnapshotHour - 1) && (indexHourDetail == sizeSnapshot - 1)) {
+                                                    emitter.onNext(Triple(temHumiModel, Constants.EMPTY_STRING, true))
+                                                } else {
+                                                    emitter.onNext(Triple(temHumiModel, Constants.EMPTY_STRING, false))
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+                                    emitter.onNext(Triple(TemHumiWrapModel(), error.message, false))
+                                }
+                            })
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    emitter.onNext(Triple(TemHumiWrapModel(), error.message, false))
+                }
+            })
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 package com.example.datn.features.chart.ui
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -9,7 +10,14 @@ import com.example.datn.core.base.BaseActivity
 import com.example.datn.databinding.ActivityChartBinding
 import com.example.datn.features.chart.viewmodel.ChartViewModel
 import com.example.datn.utils.Constants
+import com.example.datn.utils.CustomXAxisRenderer
 import com.example.datn.utils.DialogView
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.github.mikephil.charting.utils.Transformer
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,6 +49,9 @@ class ChartActivity : BaseActivity<ActivityChartBinding, ChartViewModel>() {
                                 monthDayType = date.second
                                 yearDayType = date.third
                                 setTextViewTime(timeCalendar)
+
+                                //viewModel.apply { getTemHumiByDay(dayDayType, monthDayType, yearDayType) }
+                                viewModel.apply { getTemHumiByDay(1, 1, 2022) }
                             }
                         }
                     }
@@ -68,6 +79,14 @@ class ChartActivity : BaseActivity<ActivityChartBinding, ChartViewModel>() {
                 setTypeCalendar(timeCalendar)
                 setTextViewTime(timeCalendar)
             }
+        }
+    }
+
+    override fun addDataObserver() {
+        super.addDataObserver()
+
+        viewModel.apply {
+
         }
     }
 
@@ -129,6 +148,57 @@ class ChartActivity : BaseActivity<ActivityChartBinding, ChartViewModel>() {
                         )
                     )
                 }
+            }
+        }
+    }
+
+    private fun setupLineChart(dataSet: ArrayList<ILineDataSet>, lineData: LineDataSet) {
+        binding.apply {
+            val yAxisL = lcLineChart.axisLeft
+            yAxisL.isEnabled = false
+
+            val yAxisR = lcLineChart.axisRight
+            yAxisR.isEnabled = false
+
+            val xAxis = lcLineChart.xAxis
+
+            xAxis.apply {
+                textColor = Color.BLACK
+                position = XAxis.XAxisPosition.BOTTOM
+                setDrawAxisLine(true)
+                setDrawGridLines(true)
+                enableGridDashedLine(10f, 10f, 10f)
+                gridColor = Color.WHITE
+                granularity = 1f
+                axisLineWidth = 2f
+                axisLineColor = Color.WHITE
+                axisMaximum = lineData.xMax + 0.25f
+                isGranularityEnabled = true
+            }
+
+            //set two text line in XAxis
+            val trans: Transformer = binding.lcLineChart.getTransformer(YAxis.AxisDependency.LEFT)
+            binding.lcLineChart.apply {
+                setXAxisRenderer(CustomXAxisRenderer(this.viewPortHandler, this.xAxis, trans))
+                setPinchZoom(false)
+                extraBottomOffset = 20f
+                extraRightOffset = 30f
+                extraLeftOffset = 10f
+                setDrawBorders(false)
+                legend.isEnabled = false
+                description.isEnabled = false
+                isDragEnabled = true
+                isScaleYEnabled = false
+                setVisibleXRangeMaximum(7f)
+                setVisibleXRangeMinimum(6f)
+                setMaxVisibleValueCount(50)
+                //moveViewTo(mNumberXMoveToLast.toFloat(), mNumberYMoveToLast.toFloat(), null)
+            }
+
+            val data = LineData(dataSet)
+            lcLineChart.apply {
+                setData(data)
+                invalidate()
             }
         }
     }

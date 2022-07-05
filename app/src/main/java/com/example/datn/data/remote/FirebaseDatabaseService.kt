@@ -51,6 +51,9 @@ class FirebaseDatabaseService @Inject constructor(
         }
     }
 
+    /**
+     * Get temperature and humidity realtime
+     */
     fun getRealtimeDataTemAndHumi(): Observable<TemHumiWrapModel> {
         val myRef = firebaseDatabase.getReference("swiftlet_home/user/admin/device/sht_sensor/real_time")
 
@@ -70,6 +73,9 @@ class FirebaseDatabaseService @Inject constructor(
         }
     }
 
+    /**
+     * Get list child device
+     */
     fun getListChildDevice(): Observable<Triple<ChildDeviceModel, String, String>> {
         val myRef = firebaseDatabase.getReference("swiftlet_home/user/admin/child_device")
 
@@ -104,6 +110,9 @@ class FirebaseDatabaseService @Inject constructor(
         }
     }
 
+    /**
+     * Get list temperature and humidity by day
+     */
     fun getTemHumiByDay(
         day: Int,
         month: Int,
@@ -168,6 +177,5 @@ class FirebaseDatabaseService @Inject constructor(
                 }
             })
         }
-
     }
 }

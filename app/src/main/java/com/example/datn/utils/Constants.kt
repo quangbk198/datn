@@ -18,4 +18,10 @@ object Constants {
         DATE,
         MONTH
     }
+
+    enum class ThresholdMode(val mode: Int) {
+        LOWER(0),
+        BETWEEN(1),
+        HIGHER(2)
+    }
 }

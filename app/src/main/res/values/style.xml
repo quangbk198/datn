@@ -44,4 +44,17 @@
         <item name="android:colorForeground">#42221f1f</item>
     </style>
 
+    <style name="ScrollNumberPickerStyle">
+        <item name="npv_ShownCount">3</item>
+        <item name="npv_ShowDivider">false</item>
+        <item name="npv_WrapSelectorWheel">true</item>
+        <item name="npv_ItemPaddingHorizontal">2dp</item>
+        <item name="npv_TextSizeNormal">16sp</item>
+        <item name="npv_TextSizeSelected">25dp</item>
+        <item name="npv_TextColorNormal">@android:color/darker_gray</item>
+        <item name="npv_TextColorSelected">@color/green_dark</item>
+        <item name="android:requiresFadingEdge">vertical</item>
+        <item name="android:fadingEdgeLength">56dp</item>
+    </style>
+
 </resources>

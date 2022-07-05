@@ -87,4 +87,7 @@ dependencies {
 
     // Month and year picker dialog
     implementation 'com.whiteelephant:monthandyearpicker:1.3.0'
+
+    // NumberPickerView
+    implementation "cn.carbswang.android:NumberPickerView:1.2.0"
 }

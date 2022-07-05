@@ -271,7 +271,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="@font/opensans_regular"
-                            android:text="@string/main_activity_textview_mode"
+                            android:text="@string/main_activity_textview_threshold_setting"
                             android:textColor="@color/dark_blue"
                             android:textSize="15sp" />
                     </LinearLayout>

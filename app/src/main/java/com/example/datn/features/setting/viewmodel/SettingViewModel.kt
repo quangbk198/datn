@@ -8,6 +8,19 @@ import javax.inject.Inject
 class SettingViewModel @Inject constructor(
 
 ) : BaseViewModel() {
+
+    var thresholdModeTem: Int = 1
+
+    var thresholdModeHumi: Int = 1
+
+    var thresholdTemValue1: Int = 0
+
+    var thresholdHumiValue1: Int = 0
+
+    var thresholdTemValue2: Int = 30
+
+    var thresholdHumiValue2: Int = 30
+
     override fun onDidBindViewModel() {
 
     }

@@ -10,6 +10,10 @@
     <string name="no">Không</string>
     <string name="enter_enough_infomation">Vui lòng nhập đủ thông tin</string>
     <string name="notification">Thông báo</string>
+    <string name="higher">Cao hơn</string>
+    <string name="between">Trong khoảng</string>
+    <string name="lower">Thấp hơn</string>
+    <string name="done">Xong</string>
 
     <!--Device-->
     <string name="light">Bóng đèn</string>
@@ -37,7 +41,7 @@
     <string name="main_activity_textview_state_device">Trạng thái thiết bị</string>
     <string name="main_activity_textview_option">Tùy chọn</string>
     <string name="main_activity_textview_chart">Đồ thị</string>
-    <string name="main_activity_textview_mode">Chế độ</string>
+    <string name="main_activity_textview_threshold_setting">Cài đặt ngưỡng</string>
 
     <!--User Info Activity-->
     <string name="user_info_activity_title_toolbar">Thông tin tài khoản</string>
@@ -63,6 +67,11 @@
 
     <!--Setting Activity-->
     <string name="setting_activity_title_toolbar">Cấu hình ngưỡng</string>
+    <string name="main_activity_text_spinner_temperature">Nhiệt độ (đơn vị: °C)</string>
+    <string name="main_activity_text_spinner_humidity">Độ ẩm (đơn vị: %)</string>
+    <string name="main_activity_text_input_condition">Điều kiện đầu vào</string>
+    <string name="main_activity_text_not_select_input_condition">Bạn chưa chọn điều kiện đầu vào</string>
+    <string name="main_activity_text_not_suitable_threshold">Ngưỡng không phù hợp</string>
 
     <!--Chart Activity-->
     <string name="chart_activity_textview_day_data">Dữ liệu ngày:</string>

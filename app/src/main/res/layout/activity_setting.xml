@@ -38,13 +38,14 @@
 
         <TextView
             android:id="@+id/tv_done"
-            android:paddingEnd="10dp"
-            android:textColor="@color/green_dark"
-            android:text="@string/done"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingEnd="10dp"
+            android:text="@string/done"
+            android:fontFamily="@font/opensans_semi_bold"
+            android:textColor="@color/green_dark"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -65,22 +66,23 @@
                 android:id="@+id/tv_input_condition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/opensans_regular"
                 android:text="@string/main_activity_text_input_condition"
                 android:textColor="@color/dark_blue"
                 android:textSize="16sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_input_condition"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 app:cardCornerRadius="13dp"
                 app:cardElevation="3dp"
                 app:cardUseCompatPadding="true"
-                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_input_condition">
@@ -98,7 +100,7 @@
                         android:buttonTint="@color/green_dark"
                         android:checked="true"
                         android:fontFamily="@font/opensans_regular"
-                        android:padding="10dp"
+                        android:padding="5dp"
                         android:text="@string/main_activity_text_spinner_temperature"
                         android:textSize="15sp" />
 
@@ -195,11 +197,11 @@
                         android:id="@+id/checkbox_threshold_humi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="15dp"
                         android:buttonTint="@color/green_dark"
                         android:checked="true"
                         android:fontFamily="@font/opensans_regular"
-                        android:padding="10dp"
+                        android:padding="5dp"
                         android:text="@string/main_activity_text_spinner_humidity"
                         android:textSize="15sp" />
 
@@ -291,6 +293,141 @@
 
                         </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_output_condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/opensans_regular"
+                android:text="@string/main_activity_text_output_condition"
+                android:textColor="@color/dark_blue"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_input_condition" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_output_condition"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="13dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_output_condition">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:id="@+id/checkbox_light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/green_dark"
+                            android:checked="true"
+                            android:fontFamily="@font/opensans_regular"
+                            android:padding="5dp"
+                            android:text="@string/light"
+                            android:textSize="15sp" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginEnd="10dp"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radio_on_light"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="15dp"
+                                android:buttonTint="@color/green_dark"
+                                android:checked="true"
+                                android:fontFamily="@font/opensans_regular"
+                                android:text="Bật"
+                                android:textColor="@color/dark_blue" />
+
+                            <RadioButton
+                                android:id="@+id/radio_off_light"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/green_dark"
+                                android:fontFamily="@font/opensans_regular"
+                                android:text="Tắt"
+                                android:textColor="@color/dark_blue" />
+
+                        </RadioGroup>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginTop="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:id="@+id/checkbox_pump"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/green_dark"
+                            android:checked="false"
+                            android:fontFamily="@font/opensans_regular"
+                            android:padding="5dp"
+                            android:text="@string/pump"
+                            android:textSize="15sp" />
+
+                        <RadioGroup
+                            android:alpha="0.3"
+                            android:id="@+id/rg_pump"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginEnd="10dp"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:clickable="false"
+                                android:id="@+id/radio_on_pump"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="15dp"
+                                android:buttonTint="@color/green_dark"
+                                android:checked="true"
+                                android:fontFamily="@font/opensans_regular"
+                                android:text="Bật"
+                                android:textColor="@color/dark_blue" />
+
+                            <RadioButton
+                                android:clickable="false"
+                                android:id="@+id/radio_off_pump"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/green_dark"
+                                android:fontFamily="@font/opensans_regular"
+                                android:text="Tắt"
+                                android:textColor="@color/dark_blue" />
+
+                        </RadioGroup>
+
+                    </RelativeLayout>
 
                 </LinearLayout>
 

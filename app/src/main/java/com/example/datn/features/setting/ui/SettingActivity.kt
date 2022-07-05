@@ -1,6 +1,5 @@
 package com.example.datn.features.setting.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import com.example.datn.R
@@ -34,6 +33,14 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
 
             checkboxThresholdHumi.setOnCheckedChangeListener { _, checked ->
                 clThresholdHumi.visibility = if (checked) View.VISIBLE else View.GONE
+            }
+
+            checkboxLight.setOnCheckedChangeListener { _, checked ->
+                setViewRadioGroupLight(checked)
+            }
+
+            checkboxPump.setOnCheckedChangeListener { _, checked ->
+                setViewRadioGroupPump(checked)
             }
 
             tvThresholdTem.setOnClickListener {
@@ -79,6 +86,22 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
             tvDone.setOnClickListener {
                 validateThreshold()
             }
+        }
+    }
+
+    private fun setViewRadioGroupPump(checked: Boolean) {
+        binding.apply {
+            rgPump.alpha = if (checked) 1.0f else 0.3f
+            radioOffPump.isClickable = checked
+            radioOnPump.isClickable = checked
+        }
+    }
+
+    private fun setViewRadioGroupLight(checked: Boolean) {
+        binding.apply {
+            rgLight.alpha = if (checked) 1.0f else 0.3f
+            radioOffLight.isClickable = checked
+            radioOnLight.isClickable = checked
         }
     }
 

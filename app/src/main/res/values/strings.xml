@@ -70,6 +70,7 @@
     <string name="main_activity_text_spinner_temperature">Nhiệt độ (đơn vị: °C)</string>
     <string name="main_activity_text_spinner_humidity">Độ ẩm (đơn vị: %)</string>
     <string name="main_activity_text_input_condition">Điều kiện đầu vào</string>
+    <string name="main_activity_text_output_condition">Điều kiện đầu ra</string>
     <string name="main_activity_text_not_select_input_condition">Bạn chưa chọn điều kiện đầu vào</string>
     <string name="main_activity_text_not_suitable_threshold">Ngưỡng không phù hợp</string>
 

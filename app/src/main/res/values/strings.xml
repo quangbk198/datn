@@ -73,6 +73,8 @@
     <string name="main_activity_text_output_condition">Điều kiện đầu ra</string>
     <string name="main_activity_text_not_select_input_condition">Bạn chưa chọn điều kiện đầu vào</string>
     <string name="main_activity_text_not_suitable_threshold">Ngưỡng không phù hợp</string>
+    <string name="main_activity_text_set_threshold_success">Cài đặt ngưỡng thành công</string>
+    <string name="main_activity_text_set_threshold_failed">Cài đặt ngưỡng thất bại</string>
 
     <!--Chart Activity-->
     <string name="chart_activity_textview_day_data">Dữ liệu ngày:</string>

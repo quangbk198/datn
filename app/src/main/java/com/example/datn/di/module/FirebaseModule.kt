@@ -11,13 +11,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-/**
- * Created by quangnh
- * Date: 28/6/2022
- * Time: 11:28 PM
- * Project datn
- */
-
 @InstallIn(SingletonComponent::class)
 @Module
 object FirebaseModule {

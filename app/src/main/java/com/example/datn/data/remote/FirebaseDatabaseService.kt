@@ -4,18 +4,13 @@ import android.content.Context
 import com.example.datn.R
 import com.example.datn.data.model.ChildDeviceModel
 import com.example.datn.data.model.TemHumiWrapModel
+import com.example.datn.data.model.ThresholdModel
 import com.example.datn.utils.Constants
 import com.google.firebase.database.*
 import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
 
-/**
- * Created by quangnh
- * Date: 30/6/2022
- * Time: 11:25 PM
- * Project datn
- */
 class FirebaseDatabaseService @Inject constructor(
     private val firebaseDatabase: FirebaseDatabase,
     private val context: Context
@@ -176,6 +171,24 @@ class FirebaseDatabaseService @Inject constructor(
                     emitter.onNext(Triple(TemHumiWrapModel(), error.message, false))
                 }
             })
+        }
+    }
+
+    /**
+     * Set threshold
+     */
+    fun setThreshold(
+        thresholdModel: ThresholdModel,
+        ref: DatabaseReference
+    ) : Single<Int> {
+        return Single.create { emitter ->
+            ref.setValue(thresholdModel) { error, _ ->
+                if (error != null) {
+                    emitter.onSuccess(-1)
+                } else {
+                    emitter.onSuccess(1)
+                }
+            }
         }
     }
 }

@@ -9,13 +9,6 @@ import com.example.datn.features.userinfo.viewmodel.UserInfoViewModel
 import com.example.datn.utils.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * Created by quangnh
- * Date: 29/6/2022
- * Time: 10:55 PM
- * Project datn
- */
-
 @AndroidEntryPoint
 class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding, UserInfoViewModel>() {
 

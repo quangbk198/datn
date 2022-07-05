@@ -15,13 +15,6 @@ import com.example.datn.R
 import com.example.datn.data.model.ChildDeviceModel
 import com.example.datn.utils.Constants
 
-/**
- * Created by quangnh
- * Date: 30/6/2022
- * Time: 10:52 PM
- * Project datn
- */
-
 @SuppressLint("NotifyDataSetChanged")
 class DeviceAdapter(var mContext: Context) : RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder>() {
 

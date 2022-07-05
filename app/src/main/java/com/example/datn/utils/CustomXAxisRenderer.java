@@ -11,12 +11,6 @@ import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.Utils;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
-/**
- * Created by quangnh
- * Date: 8/12/2021
- * Time: 10:52 PM
- * Project ONEHomeApplication
- */
 public class CustomXAxisRenderer extends XAxisRenderer {
     public CustomXAxisRenderer(ViewPortHandler viewPortHandler, XAxis xAxis, Transformer trans) {
         super(viewPortHandler, xAxis, trans);

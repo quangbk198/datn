@@ -28,10 +28,33 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
             ivBack.setOnClickListener { onBackPressed() }
 
             checkboxThresholdTemperature.setOnCheckedChangeListener { _, checked ->
+                if (!checked) {
+                    viewModel.apply {
+                        thresholdUpTem = -1
+                        thresholdDownTem = -1
+                    }
+                } else {
+                    viewModel.apply {
+                        thresholdUpTem = tvThresholdTemValue2.text.toString().toInt()
+                        thresholdDownTem = tvThresholdTemValue1.text.toString().toInt()
+                    }
+                }
                 clThresholdTem.visibility = if (checked) View.VISIBLE else View.GONE
             }
 
             checkboxThresholdHumi.setOnCheckedChangeListener { _, checked ->
+                if (!checked) {
+                    viewModel.apply {
+                        thresholdUpHumi = -1
+                        thresholdDownHumi = -1
+                    }
+                } else {
+                    viewModel.apply {
+                        thresholdUpHumi = tvThresholdHumiValue2.text.toString().toInt()
+                        thresholdDownHumi = tvThresholdHumiValue1.text.toString().toInt()
+                    }
+                }
+
                 clThresholdHumi.visibility = if (checked) View.VISIBLE else View.GONE
             }
 
@@ -58,28 +81,28 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
             tvThresholdTemValue1.setOnClickListener {
                 DialogView.showDialogSelectValue(this@SettingActivity) { value ->
                     tvThresholdTemValue1.text = value.toString()
-                    viewModel.thresholdTemValue1 = value
+                    viewModel.thresholdDownTem = value
                 }
             }
 
             tvThresholdHumiValue1.setOnClickListener {
                 DialogView.showDialogSelectValue(this@SettingActivity) { value ->
                     tvThresholdHumiValue1.text = value.toString()
-                    viewModel.thresholdHumiValue1 = value
+                    viewModel.thresholdDownHumi = value
                 }
             }
 
             tvThresholdTemValue2.setOnClickListener {
                 DialogView.showDialogSelectValue(this@SettingActivity) { value ->
                     tvThresholdTemValue2.text = value.toString()
-                    viewModel.thresholdTemValue2 = value
+                    viewModel.thresholdUpTem = value
                 }
             }
 
             tvThresholdHumiValue2.setOnClickListener {
                 DialogView.showDialogSelectValue(this@SettingActivity) { value ->
                     tvThresholdHumiValue2.text = value.toString()
-                    viewModel.thresholdHumiValue2 = value
+                    viewModel.thresholdUpHumi = value
                 }
             }
 
@@ -135,25 +158,44 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
                 showToast(getString(R.string.main_activity_text_not_select_input_condition))
             } else {
                 viewModel.apply {
-
                     if (checkboxThresholdTemperature.isChecked &&
-                        thresholdModeTem == 1 &&
-                        thresholdTemValue1 >= thresholdTemValue2) {
+                        thresholdTemMode == 1 &&
+                        thresholdDownTem >= thresholdUpTem) {
                         showToast(getString(R.string.main_activity_text_not_suitable_threshold))
-                    }
-
-                    if (checkboxThresholdHumi.isChecked &&
-                        thresholdModeHumi == 1 &&
-                        thresholdHumiValue1 >= thresholdHumiValue2) {
+                    } else if (checkboxThresholdHumi.isChecked &&
+                        thresholdHumiMode == 1 &&
+                        thresholdDownHumi >= thresholdUpHumi) {
                         showToast(getString(R.string.main_activity_text_not_suitable_threshold))
+                    } else {
+                        setThresholdOnFirebase(
+                            checkboxThresholdTemperature.isChecked,
+                            checkboxThresholdHumi.isChecked
+                        )
                     }
                 }
             }
         }
     }
 
+    override fun addDataObserver() {
+        super.addDataObserver()
+
+        viewModel.apply {
+            updateThresholdSuccess.observe(this@SettingActivity) { success ->
+                if (success) {
+                    showToast(getString(R.string.main_activity_text_set_threshold_success))
+                } else {
+                    showToast(getString(R.string.main_activity_text_set_threshold_failed))
+                }
+            }
+        }
+    }
+
     private fun setThresholdHumiMode(mode: Int) {
-        viewModel.thresholdModeHumi = mode
+        viewModel.apply {
+            thresholdHumiMode = mode
+            if (mode != 1) thresholdDownHumi = -1
+        }
 
         binding.apply {
             tvThresholdHumi.text = when (mode) {
@@ -176,7 +218,10 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
     }
 
     private fun setThresholdTemMode(mode: Int) {
-        viewModel.thresholdModeTem = mode
+        viewModel.apply {
+            thresholdTemMode = mode
+            if (mode != 1) thresholdDownTem = -1
+        }
 
         binding.apply {
             tvThresholdTem.text = when (mode) {

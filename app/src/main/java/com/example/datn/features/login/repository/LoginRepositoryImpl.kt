@@ -9,12 +9,6 @@ import com.google.firebase.database.ValueEventListener
 import io.reactivex.Single
 import javax.inject.Inject
 
-/**
- * Created by quangnh
- * Date: 28/6/2022
- * Time: 11:32 PM
- * Project datn
- */
 class LoginRepositoryImpl @Inject constructor(
     private val firebaseDatabaseService: FirebaseDatabaseService,
 ) : LoginRepository {

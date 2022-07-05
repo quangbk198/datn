@@ -9,13 +9,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 
-/**
- * Created by quangnh
- * Date: 1/7/2022
- * Time: 12:00 AM
- * Project datn
- */
-
 @InstallIn(ActivityComponent::class)
 @Module
 class ViewModule {

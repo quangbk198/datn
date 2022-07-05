@@ -21,6 +21,20 @@ class SettingViewModel @Inject constructor(
 
     var thresholdHumiValue2: Int = 30
 
+    /**
+     * State of light:
+     * 0: off
+     * 1: on
+     */
+    var stateLight = 0
+
+    /**
+     * State of pump:
+     * 0: off
+     * 1: on
+     */
+    var statePump = 0
+
     override fun onDidBindViewModel() {
 
     }

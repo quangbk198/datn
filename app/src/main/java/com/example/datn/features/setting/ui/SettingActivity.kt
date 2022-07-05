@@ -86,6 +86,30 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
             tvDone.setOnClickListener {
                 validateThreshold()
             }
+
+            rgLight.setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    R.id.radio_on_light -> {
+                        viewModel.stateLight = 1
+                    }
+
+                    R.id.radio_off_light -> {
+                        viewModel.stateLight = 0
+                    }
+                }
+            }
+
+            rgPump.setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    R.id.radio_on_pump -> {
+                        viewModel.statePump = 1
+                    }
+
+                    R.id.radio_off_pump -> {
+                        viewModel.statePump = 0
+                    }
+                }
+            }
         }
     }
 

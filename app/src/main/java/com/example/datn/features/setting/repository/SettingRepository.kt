@@ -1,5 +1,6 @@
 package com.example.datn.features.setting.repository
 
+import com.example.datn.data.model.OutputConditionModel
 import com.example.datn.data.model.ThresholdModel
 import com.google.firebase.database.DatabaseReference
 import io.reactivex.Single
@@ -17,6 +18,14 @@ interface SettingRepository {
      */
     fun setThreshold(
         thresholdModel: ThresholdModel,
+        ref: DatabaseReference
+    ) : Single<Int>
+
+    /**
+     * Set output condition
+     */
+    fun setOutputCondition(
+        outputCondition: OutputConditionModel,
         ref: DatabaseReference
     ) : Single<Int>
 

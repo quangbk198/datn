@@ -1,5 +1,6 @@
 package com.example.datn.features.setting.repository
 
+import com.example.datn.data.model.OutputConditionModel
 import com.example.datn.data.model.ThresholdModel
 import com.example.datn.data.remote.FirebaseDatabaseService
 import com.google.firebase.database.DatabaseReference
@@ -21,5 +22,12 @@ class SettingRepositoryImpl @Inject constructor(
         ref: DatabaseReference
     ): Single<Int> {
         return firebaseDatabaseService.setThreshold(thresholdModel, ref)
+    }
+
+    override fun setOutputCondition(
+        outputCondition: OutputConditionModel,
+        ref: DatabaseReference
+    ): Single<Int> {
+        return firebaseDatabaseService.setOutputCondition(outputCondition, ref)
     }
 }

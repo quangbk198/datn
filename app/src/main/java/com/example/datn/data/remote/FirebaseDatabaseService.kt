@@ -3,6 +3,7 @@ package com.example.datn.data.remote
 import android.content.Context
 import com.example.datn.R
 import com.example.datn.data.model.ChildDeviceModel
+import com.example.datn.data.model.OutputConditionModel
 import com.example.datn.data.model.TemHumiWrapModel
 import com.example.datn.data.model.ThresholdModel
 import com.example.datn.utils.Constants
@@ -183,6 +184,24 @@ class FirebaseDatabaseService @Inject constructor(
     ) : Single<Int> {
         return Single.create { emitter ->
             ref.setValue(thresholdModel) { error, _ ->
+                if (error != null) {
+                    emitter.onSuccess(-1)
+                } else {
+                    emitter.onSuccess(1)
+                }
+            }
+        }
+    }
+
+    /**
+     * Set output condition
+     */
+    fun setOutputCondition(
+        outputCondition: OutputConditionModel,
+        ref: DatabaseReference
+    ) : Single<Int> {
+        return Single.create { emitter ->
+            ref.setValue(outputCondition) { error, _ ->
                 if (error != null) {
                     emitter.onSuccess(-1)
                 } else {

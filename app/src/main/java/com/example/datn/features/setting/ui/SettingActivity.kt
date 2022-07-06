@@ -59,10 +59,28 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
             }
 
             checkboxLight.setOnCheckedChangeListener { _, checked ->
+                viewModel.apply {
+                    if (!checked) {
+                        stateLight = -1
+                    } else {
+                        if (radioOnLight.isChecked) stateLight = 1
+                        if (radioOffLight.isChecked) stateLight = 0
+                    }
+                }
+
                 setViewRadioGroupLight(checked)
             }
 
             checkboxPump.setOnCheckedChangeListener { _, checked ->
+                viewModel.apply {
+                    if (!checked) {
+                        statePump = -1
+                    } else {
+                        if (radioOnPump.isChecked) statePump = 1
+                        if (radioOffPump.isChecked) statePump = 0
+                    }
+                }
+
                 setViewRadioGroupPump(checked)
             }
 
@@ -156,6 +174,8 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
         binding.apply {
             if (!checkboxThresholdTemperature.isChecked && !checkboxThresholdHumi.isChecked) {
                 showToast(getString(R.string.main_activity_text_not_select_input_condition))
+            } else if (!checkboxLight.isChecked && !checkboxPump.isChecked) {
+                showToast(getString(R.string.main_activity_text_not_select_output_condition))
             } else {
                 viewModel.apply {
                     if (checkboxThresholdTemperature.isChecked &&
@@ -169,7 +189,9 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
                     } else {
                         setThresholdOnFirebase(
                             checkboxThresholdTemperature.isChecked,
-                            checkboxThresholdHumi.isChecked
+                            checkboxThresholdHumi.isChecked,
+                            checkboxLight.isChecked,
+                            checkboxPump.isChecked
                         )
                     }
                 }

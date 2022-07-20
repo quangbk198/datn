@@ -112,12 +112,11 @@
 
                         <TextView
                             android:id="@+id/tv_threshold_tem"
-                            android:layout_width="120dp"
+                            android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/background_threshold_textview"
                             android:fontFamily="@font/opensans_regular"
                             android:gravity="center"
-                            android:paddingHorizontal="10dp"
                             android:paddingVertical="5dp"
                             android:text="@string/between"
                             android:textSize="15sp"
@@ -141,6 +140,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <LinearLayout
+                            android:gravity="center"
                             android:id="@+id/ln_threshold_tem_between"
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
@@ -213,12 +213,11 @@
 
                         <TextView
                             android:id="@+id/tv_threshold_humi"
-                            android:layout_width="120dp"
+                            android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/background_threshold_textview"
                             android:fontFamily="@font/opensans_regular"
                             android:gravity="center"
-                            android:paddingHorizontal="10dp"
                             android:paddingVertical="5dp"
                             android:text="@string/between"
                             android:textSize="15sp"
@@ -242,6 +241,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <LinearLayout
+                            android:gravity="center"
                             android:id="@+id/ln_threshold_humi_between"
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"

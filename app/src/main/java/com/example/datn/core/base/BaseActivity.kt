@@ -198,15 +198,6 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
         }
     }
 
-    fun addFragment(fragment: BaseFragment<*, *>, animate: Boolean) {
-        addFragment(
-            fragment,
-            animate = animate,
-            clearStack = false,
-            tag = fragment.getTagFragment()
-        )
-    }
-
     fun addFragment(fragment: BaseFragment<*, *>, tag: String, animate: Boolean) {
         addFragment(fragment, animate = animate, clearStack = false, tag = tag)
     }

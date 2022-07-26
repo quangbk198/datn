@@ -223,21 +223,48 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
             binding.apply {
                 temThreshold.observe(this@SettingActivity) { tem ->
                     checkboxThresholdTemperature.isChecked = tem.select == true
-                    tem.mode?.let { setThresholdTemMode(it) }
-                    tvThresholdTemValue1.text = tem.threshold_down.toString()
-                    tvThresholdTemValue2.text = tem.threshold_up.toString()
+
+                    tem.apply {
+                        mode?.let {
+                            thresholdTemMode = it
+                            setThresholdTemMode(it)
+                        }
+                        threshold_down?.let { value ->
+                            tvThresholdTemValue1.text = value.toString()
+                            thresholdDownTem = value
+                        }
+
+                        threshold_up?.let { value ->
+                            tvThresholdTemValue2.text = value.toString()
+                            thresholdUpTem = value
+                        }
+                    }
                 }
 
                 humiThreshold.observe(this@SettingActivity) { humi ->
                     checkboxThresholdHumi.isChecked = humi.select == true
-                    humi.mode?.let { setThresholdHumiMode(it) }
-                    tvThresholdHumiValue1.text = humi.threshold_down.toString()
-                    tvThresholdHumiValue2.text = humi.threshold_up.toString()
+
+                    humi.apply {
+                        mode?.let {
+                            thresholdHumiMode = it
+                            setThresholdHumiMode(it)
+                        }
+                        threshold_down?.let { value ->
+                            tvThresholdHumiValue1.text = value.toString()
+                            thresholdDownHumi = value
+                        }
+
+                        threshold_up?.let { value ->
+                            tvThresholdHumiValue2.text = value.toString()
+                            thresholdUpHumi = value
+                        }
+                    }
                 }
 
                 stateLightOutput.observe(this@SettingActivity) { state ->
                     checkboxLight.isChecked = state.select == true
                     state.state?.let {
+                        stateLight = it
                         radioOnLight.isChecked = it == 1
                         radioOffLight.isChecked = it == 0
                     }
@@ -246,6 +273,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
                 statePumpOutput.observe(this@SettingActivity) { state ->
                     checkboxPump.isChecked = state.select == true
                     state.state?.let {
+                        statePump = it
                         radioOnPump.isChecked = it == 1
                         radioOffPump.isChecked = it == 0
                     }

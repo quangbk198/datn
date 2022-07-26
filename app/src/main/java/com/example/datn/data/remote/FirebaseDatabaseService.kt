@@ -2,10 +2,7 @@ package com.example.datn.data.remote
 
 import android.content.Context
 import com.example.datn.R
-import com.example.datn.data.model.ChildDeviceModel
-import com.example.datn.data.model.OutputConditionModel
-import com.example.datn.data.model.TemHumiWrapModel
-import com.example.datn.data.model.ThresholdModel
+import com.example.datn.data.model.*
 import com.example.datn.utils.Constants
 import com.google.firebase.database.*
 import io.reactivex.Observable
@@ -208,6 +205,98 @@ class FirebaseDatabaseService @Inject constructor(
                     emitter.onSuccess(1)
                 }
             }
+        }
+    }
+
+    /**
+     * Get temperature threshold
+     */
+    fun getTemperatureThreshold(): Observable<ThresholdResponse> {
+        return Observable.create { emitter ->
+            val path = "swiftlet_home/user/admin/device/sht_sensor/threshold/input/tem"
+
+            val myRef = firebaseDatabase.getReference(path)
+            myRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val data = snapshot.getValue(ThresholdResponse::class.java)
+                    if (data != null) {
+                        emitter.onNext(data)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
+        }
+    }
+
+    /**
+     * Get humidity threshold
+     */
+    fun getHumidityThreshold(): Observable<ThresholdResponse> {
+        return Observable.create { emitter ->
+            val path = "swiftlet_home/user/admin/device/sht_sensor/threshold/input/humi"
+
+            val myRef = firebaseDatabase.getReference(path)
+            myRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val data = snapshot.getValue(ThresholdResponse::class.java)
+                    if (data != null) {
+                        emitter.onNext(data)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
+        }
+    }
+
+    /**
+     * Get state light device
+     */
+    fun getStateLightDevice(): Observable<OutputConditionResponse> {
+        return Observable.create {  emitter ->
+            val path = "swiftlet_home/user/admin/device/sht_sensor/threshold/output/light"
+
+            val myRef = firebaseDatabase.getReference(path)
+            myRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val data = snapshot.getValue(OutputConditionResponse::class.java)
+                    if (data != null) {
+                        emitter.onNext(data)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
+        }
+    }
+
+    /**
+     * Get state pump device
+     */
+    fun getStatePumpDevice(): Observable<OutputConditionResponse> {
+        return Observable.create {  emitter ->
+            val path = "swiftlet_home/user/admin/device/sht_sensor/threshold/output/pump"
+
+            val myRef = firebaseDatabase.getReference(path)
+            myRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val data = snapshot.getValue(OutputConditionResponse::class.java)
+                    if (data != null) {
+                        emitter.onNext(data)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
         }
     }
 }

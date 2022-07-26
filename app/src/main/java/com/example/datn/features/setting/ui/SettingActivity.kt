@@ -28,31 +28,18 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
             ivBack.setOnClickListener { onBackPressed() }
 
             checkboxThresholdTemperature.setOnCheckedChangeListener { _, checked ->
-                if (!checked) {
-                    viewModel.apply {
-                        thresholdUpTem = -1
-                        thresholdDownTem = -1
-                    }
-                } else {
-                    viewModel.apply {
-                        thresholdUpTem = tvThresholdTemValue2.text.toString().toInt()
-                        thresholdDownTem = tvThresholdTemValue1.text.toString().toInt()
-                    }
+                viewModel.apply {
+                    thresholdUpTem = tvThresholdTemValue2.text.toString().toInt()
+                    thresholdDownTem = tvThresholdTemValue1.text.toString().toInt()
                 }
+
                 clThresholdTem.visibility = if (checked) View.VISIBLE else View.GONE
             }
 
             checkboxThresholdHumi.setOnCheckedChangeListener { _, checked ->
-                if (!checked) {
-                    viewModel.apply {
-                        thresholdUpHumi = -1
-                        thresholdDownHumi = -1
-                    }
-                } else {
-                    viewModel.apply {
-                        thresholdUpHumi = tvThresholdHumiValue2.text.toString().toInt()
-                        thresholdDownHumi = tvThresholdHumiValue1.text.toString().toInt()
-                    }
+                viewModel.apply {
+                    thresholdUpHumi = tvThresholdHumiValue2.text.toString().toInt()
+                    thresholdDownHumi = tvThresholdHumiValue1.text.toString().toInt()
                 }
 
                 clThresholdHumi.visibility = if (checked) View.VISIBLE else View.GONE
@@ -60,12 +47,8 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
 
             checkboxLight.setOnCheckedChangeListener { _, checked ->
                 viewModel.apply {
-                    if (!checked) {
-                        stateLight = -1
-                    } else {
-                        if (radioOnLight.isChecked) stateLight = 1
-                        if (radioOffLight.isChecked) stateLight = 0
-                    }
+                    if (radioOnLight.isChecked) stateLight = 1
+                    if (radioOffLight.isChecked) stateLight = 0
                 }
 
                 setViewRadioGroupLight(checked)
@@ -73,52 +56,78 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
 
             checkboxPump.setOnCheckedChangeListener { _, checked ->
                 viewModel.apply {
-                    if (!checked) {
-                        statePump = -1
-                    } else {
-                        if (radioOnPump.isChecked) statePump = 1
-                        if (radioOffPump.isChecked) statePump = 0
-                    }
+                    if (radioOnPump.isChecked) statePump = 1
+                    if (radioOffPump.isChecked) statePump = 0
                 }
 
                 setViewRadioGroupPump(checked)
             }
 
             tvThresholdTem.setOnClickListener {
-                DialogView.showDialogThresholdLabel(this@SettingActivity) { mode ->
-                    setThresholdTemMode(mode)
+                viewModel.temThreshold.value?.mode?.let { currentMode ->
+                    DialogView.showDialogThresholdLabel(
+                        this@SettingActivity,
+                        currentMode
+                    ) { mode ->
+                        setThresholdTemMode(mode)
+                    }
                 }
             }
 
             tvThresholdHumi.setOnClickListener {
-                DialogView.showDialogThresholdLabel(this@SettingActivity) { mode ->
-                    setThresholdHumiMode(mode)
+                viewModel.humiThreshold.value?.mode?.let { currentMode ->
+                    DialogView.showDialogThresholdLabel(
+                        this@SettingActivity,
+                        currentMode
+                    ) { mode ->
+                        setThresholdHumiMode(mode)
+                    }
                 }
             }
 
             tvThresholdTemValue1.setOnClickListener {
-                DialogView.showDialogSelectValue(this@SettingActivity) { value ->
+                DialogView.showDialogSelectValue(
+                    this@SettingActivity,
+                    tvThresholdTemValue1.text.toString().trim().toInt(),
+                    0,
+                    50
+                ) { value ->
                     tvThresholdTemValue1.text = value.toString()
                     viewModel.thresholdDownTem = value
                 }
             }
 
             tvThresholdHumiValue1.setOnClickListener {
-                DialogView.showDialogSelectValue(this@SettingActivity) { value ->
+                DialogView.showDialogSelectValue(
+                    this@SettingActivity,
+                    tvThresholdHumiValue1.text.toString().trim().toInt(),
+                    0,
+                    100
+                ) { value ->
                     tvThresholdHumiValue1.text = value.toString()
                     viewModel.thresholdDownHumi = value
                 }
             }
 
             tvThresholdTemValue2.setOnClickListener {
-                DialogView.showDialogSelectValue(this@SettingActivity) { value ->
+                DialogView.showDialogSelectValue(
+                    this@SettingActivity,
+                    tvThresholdTemValue2.text.toString().trim().toInt(),
+                    0,
+                    50
+                ) { value ->
                     tvThresholdTemValue2.text = value.toString()
                     viewModel.thresholdUpTem = value
                 }
             }
 
             tvThresholdHumiValue2.setOnClickListener {
-                DialogView.showDialogSelectValue(this@SettingActivity) { value ->
+                DialogView.showDialogSelectValue(
+                    this@SettingActivity,
+                    tvThresholdHumiValue2.text.toString().trim().toInt(),
+                    0,
+                    100
+                ) { value ->
                     tvThresholdHumiValue2.text = value.toString()
                     viewModel.thresholdUpHumi = value
                 }
@@ -210,13 +219,45 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
                     showToast(getString(R.string.main_activity_text_set_threshold_failed))
                 }
             }
+
+            binding.apply {
+                temThreshold.observe(this@SettingActivity) { tem ->
+                    checkboxThresholdTemperature.isChecked = tem.select == true
+                    tem.mode?.let { setThresholdTemMode(it) }
+                    tvThresholdTemValue1.text = tem.threshold_down.toString()
+                    tvThresholdTemValue2.text = tem.threshold_up.toString()
+                }
+
+                humiThreshold.observe(this@SettingActivity) { humi ->
+                    checkboxThresholdHumi.isChecked = humi.select == true
+                    humi.mode?.let { setThresholdHumiMode(it) }
+                    tvThresholdHumiValue1.text = humi.threshold_down.toString()
+                    tvThresholdHumiValue2.text = humi.threshold_up.toString()
+                }
+
+                stateLightOutput.observe(this@SettingActivity) { state ->
+                    checkboxLight.isChecked = state.select == true
+                    state.state?.let {
+                        radioOnLight.isChecked = it == 1
+                        radioOffLight.isChecked = it == 0
+                    }
+                }
+
+                statePumpOutput.observe(this@SettingActivity) { state ->
+                    checkboxPump.isChecked = state.select == true
+                    state.state?.let {
+                        radioOnPump.isChecked = it == 1
+                        radioOffPump.isChecked = it == 0
+                    }
+                }
+            }
         }
     }
 
     private fun setThresholdHumiMode(mode: Int) {
         viewModel.apply {
             thresholdHumiMode = mode
-            if (mode != 1) thresholdDownHumi = -1
+            if (mode != 1) thresholdDownHumi = 0
         }
 
         binding.apply {
@@ -242,7 +283,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
     private fun setThresholdTemMode(mode: Int) {
         viewModel.apply {
             thresholdTemMode = mode
-            if (mode != 1) thresholdDownTem = -1
+            if (mode != 1) thresholdDownTem = 0
         }
 
         binding.apply {

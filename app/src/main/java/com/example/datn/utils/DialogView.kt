@@ -87,6 +87,7 @@ object DialogView {
 
     fun showDialogThresholdLabel(
         activity: Activity,
+        currentValue: Int,
         onClickSave: (Int) -> Unit
     ) {
         val listLabel = arrayListOf(
@@ -117,7 +118,7 @@ object DialogView {
                 displayedValues = listLabel.toTypedArray()
                 minValue = 0
                 maxValue = 2
-                value = 1
+                value = currentValue
             }
 
             btnCancel.setOnClickListener {
@@ -135,6 +136,9 @@ object DialogView {
 
     fun showDialogSelectValue(
         activity: Activity,
+        currentValue: Int,
+        downValue: Int,
+        upValue: Int,
         onClickSave: (Int) -> Unit
     ) {
         val binding = DialogSelectValueBinding.inflate(LayoutInflater.from(activity))
@@ -156,8 +160,9 @@ object DialogView {
 
         binding.apply {
             thresholdMode.apply {
-                minValue = 0
-                maxValue = 50
+                minValue = downValue
+                maxValue = upValue
+                value = currentValue
             }
 
             btnCancel.setOnClickListener {

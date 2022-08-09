@@ -18,6 +18,8 @@ import com.example.datn.utils.Constants
 @SuppressLint("NotifyDataSetChanged")
 class DeviceAdapter(var mContext: Context) : RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder>() {
 
+    lateinit var changeStateDevice: (ChildDeviceModel) -> Unit
+
     private val mListDevice = mutableListOf<ChildDeviceModel>()
 
     fun addData(device: ChildDeviceModel) {
@@ -69,6 +71,13 @@ class DeviceAdapter(var mContext: Context) : RecyclerView.Adapter<DeviceAdapter.
                 itemView.context,
                 if (device.state == 1) R.color.light_blue else R.color.grey_light_text
             ))
+
+            swState.setOnClickListener {
+                if (this@DeviceAdapter::changeStateDevice.isInitialized) {
+                    device.state = if (swState.isChecked) 1 else 0
+                    changeStateDevice.invoke(device)
+                }
+            }
         }
     }
 

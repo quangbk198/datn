@@ -21,9 +21,13 @@ class MainViewModel @Inject constructor(
 
     private val _childDevice: MutableLiveData<Pair<ChildDeviceModel, String>> by lazy { MutableLiveData() }
 
+    private val _turnOnOffDevice: MutableLiveData<Pair<Boolean, ChildDeviceModel>> by lazy { MutableLiveData() }
+
     val realtimeData: LiveData<TemHumiWrapModel> get() = _realtimeData
 
     val childDevice: LiveData<Pair<ChildDeviceModel, String>> get() = _childDevice
+
+    val turnOnOffDevice: LiveData<Pair<Boolean, ChildDeviceModel>> get() = _turnOnOffDevice
 
     override fun onDidBindViewModel() {
         getRealtimeDataTemAndHumi()
@@ -67,6 +71,30 @@ class MainViewModel @Inject constructor(
                             }
                         }
                 )
+            } else {
+                setErrorString(resourcesService.getString(R.string.have_no_internet))
+            }
+        }
+    }
+
+    fun turnOnOffDevice(device: ChildDeviceModel) {
+        rxNetwork.checkInternet { isConnected ->
+            if (isConnected) {
+                setLoading(true)
+
+                if (device.model_code != null && device.state != null) {
+                    compositeDisposable.add(
+                        mainRepository.turnOnOffChildDevice(device.model_code!!, device.state!!)
+                            .subscribeOn(schedulerProvider.io())
+                            .observeOn(schedulerProvider.ui())
+                            .subscribe({ result ->
+                                setLoading(false)
+                                _turnOnOffDevice.value = Pair(result == 1, device)
+                            }, {
+                                setLoading(false)
+                            })
+                    )
+                }
             } else {
                 setErrorString(resourcesService.getString(R.string.have_no_internet))
             }

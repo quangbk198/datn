@@ -3,7 +3,6 @@ package com.example.datn.features.main.ui
 import android.annotation.SuppressLint
 import android.os.Build
 import android.view.LayoutInflater
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -60,6 +59,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             lnMode.setOnClickListener {
                 openActivity(SettingActivity::class.java)
             }
+
+            deviceAdapter.changeStateDevice = { device ->
+                viewModel.turnOnOffDevice(device)
+            }
         }
     }
 
@@ -106,6 +109,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     "update" -> {
                         deviceAdapter.updateData(data.first)
                     }
+                }
+            }
+
+            turnOnOffDevice.observe(this@MainActivity) { data ->
+                if (!data.first) {
+                    deviceAdapter.updateData(data.second)
+                    showToast(getString(R.string.error))
                 }
             }
         }

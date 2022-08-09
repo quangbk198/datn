@@ -300,4 +300,22 @@ class FirebaseDatabaseService @Inject constructor(
             })
         }
     }
+
+    /**
+     * Turn on, off device
+     */
+    fun turnOnOffChildDevice(modelCode: String, state: Int) : Single<Int> {
+        val path = "swiftlet_home/user/admin/child_device/$modelCode/state"
+
+        return Single.create { emitter ->
+            firebaseDatabase.getReference(path).setValue(state) { error, _ ->
+                if (error != null) {
+                    emitter.onSuccess(-1)
+                } else {
+                    emitter.onSuccess(1)
+                }
+            }
+
+        }
+    }
 }

@@ -10,12 +10,6 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
 
-/**
- * Created by quangnh
- * Date: 5/7/2022
- * Time: 11:56 PM
- * Project datn
- */
 class SettingRepositoryImpl @Inject constructor(
     private val firebaseDatabaseService: FirebaseDatabaseService
 ) : SettingRepository{

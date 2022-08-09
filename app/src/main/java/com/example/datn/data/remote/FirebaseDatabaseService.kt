@@ -1,6 +1,7 @@
 package com.example.datn.data.remote
 
 import android.content.Context
+import android.util.Log
 import com.example.datn.R
 import com.example.datn.data.model.*
 import com.example.datn.utils.Constants
@@ -117,7 +118,7 @@ class FirebaseDatabaseService @Inject constructor(
 
             val myRef = firebaseDatabase.getReference(path)
 
-            myRef.addValueEventListener(object : ValueEventListener {
+            myRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshotHour: DataSnapshot) {
                     if (snapshotHour.value == null) {
                         emitter.onNext(Triple(TemHumiWrapModel(), context.getString(R.string.chart_activity_data_chart_empty), false))
@@ -130,7 +131,7 @@ class FirebaseDatabaseService @Inject constructor(
                         snapshotHour.children.forEachIndexed { indexHour, dataSnapshot ->
                             dataSnapshot.key?.let { keyHour ->
 
-                                firebaseDatabase.getReference("$path/$keyHour").addValueEventListener(object : ValueEventListener {
+                                firebaseDatabase.getReference("$path/$keyHour").addListenerForSingleValueEvent(object : ValueEventListener {
                                     override fun onDataChange(snapshot: DataSnapshot) {
                                         if (snapshot.value == null) {
                                             emitter.onNext(Triple(TemHumiWrapModel(), context.getString(R.string.chart_activity_data_chart_empty), false))

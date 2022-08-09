@@ -8,12 +8,6 @@ import com.google.firebase.database.DatabaseReference
 import io.reactivex.Observable
 import io.reactivex.Single
 
-/**
- * Created by quangnh
- * Date: 5/7/2022
- * Time: 11:55 PM
- * Project datn
- */
 interface SettingRepository {
 
     /**
